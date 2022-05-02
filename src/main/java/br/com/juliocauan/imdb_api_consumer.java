@@ -19,10 +19,9 @@ public class imdb_api_consumer{
 		HttpRequest request = HttpRequest.newBuilder().uri(top250MoviesURI).timeout(Duration.ofSeconds(30L)).header("Content-Type", "application/json").GET().build();
 		HttpResponse<String> response = client.send(request, BodyHandlers.ofString());
 		System.out.println("Status Code: " + response.statusCode());
-
 		String json = response.body();
-        String[] moviesArray = Movie.parseJsonMovies(json);
-        List<Movie> movies = Movie.parseArrayToList(moviesArray);
+        
+        List<Movie> movies = Movie.parseJsonToMovieList(json);
         movies.forEach(System.out::println);
     }
 
