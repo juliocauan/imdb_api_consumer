@@ -8,14 +8,14 @@ public class Movie {
 
     private String title;
     private String imageUrl;
-    private String rating;
-    private String year;
+    private Float rating;
+    private Short year;
 
     private Movie(String movie){
         this.title = parseAttribute(movie, GROUP.TITLE);
         this.imageUrl = parseAttribute(movie, GROUP.IMAGE_URL);
-        this.rating = parseAttribute(movie, GROUP.IMDB_RATING);
-        this.year = parseAttribute(movie, GROUP.YEAR);
+        this.rating = Float.valueOf(parseAttribute(movie, GROUP.IMDB_RATING));
+        this.year = Short.valueOf(parseAttribute(movie, GROUP.YEAR));
     }
 
     public static List<Movie> parseArrayToList(String[] moviesArray) {
@@ -38,22 +38,22 @@ public class Movie {
         return json.substring(11, json.length()-21).split("\\}.\\{");
     }
 
-    public Movie(String title, String year) {
+    public Movie(String title, Short year) {
         this.title = title;
         this.year = year;
-        this.rating = "0";
+        this.rating = 0f;
     }
 
-    public Movie(String title, String year, String imageUrl) {
+    public Movie(String title, Short year, String imageUrl) {
         this(title, year);
         this.imageUrl = imageUrl;
     }
 
-    public String getYear() {
+    public Short getYear() {
         return year;
     }
 
-    public String getRating() {
+    public Float getRating() {
         return rating;
     }
 
