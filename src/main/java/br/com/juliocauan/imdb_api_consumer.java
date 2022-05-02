@@ -7,23 +7,26 @@ import java.net.http.HttpResponse;
 import java.net.http.HttpClient.Version;
 import java.net.http.HttpResponse.BodyHandlers;
 import java.time.Duration;
-import java.util.ArrayList;
+import java.util.List;
 
 public class imdb_api_consumer{
     public static void main(String[] args) throws Exception {
-		HttpClient client = HttpClient.newBuilder()
-			.version(Version.HTTP_2)
-			.build();
-		HttpRequest request = HttpRequest.newBuilder()
-			.uri(URI.create("https://imdb-api.com/en/API/Top250Movies/k_jngird0l"))
-			.timeout(Duration.ofMinutes(1))
-			.header("Content-Type", "application/json")
-			.GET()
-			.build();
+
+        String apiKey = "k_jngird0l";
+        URI top250MoviesURI = URI.create("https://imdb-api.com/en/API/Top250Movies/" + apiKey);
+
+		HttpClient client = HttpClient.newBuilder().version(Version.HTTP_2).build();
+		HttpRequest request = HttpRequest.newBuilder().uri(top250MoviesURI).timeout(Duration.ofSeconds(30L)).header("Content-Type", "application/json").GET().build();
 		HttpResponse<String> response = client.send(request, BodyHandlers.ofString());
 		System.out.println(response.statusCode());
-		String json = response.body().substring(10, response.body().length()-20);
-		System.out.println(json);
-		ArrayList<String> movies = new ArrayList<String>();
+
+		String json = response.body();
+        String[] movies = parseJsonMovies(json);
+        
     }
+
+    private static String[] parseJsonMovies(String json) {
+        return json.substring(11, json.length()-21).split("\\}.\\{");
+    }
+
 }
