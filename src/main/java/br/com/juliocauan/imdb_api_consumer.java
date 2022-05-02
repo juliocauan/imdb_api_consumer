@@ -27,8 +27,9 @@ public class imdb_api_consumer{
         List<String> titles = parseAttribute(movies, GROUP.TITLE);
         List<String> urlImages = parseAttribute(movies, GROUP.IMAGE_URL);
         List<String> years = parseAttribute(movies, GROUP.YEAR);
-        List<String> notas = parseAttribute(movies, GROUP.IMDB_RATING);
-        notas.forEach(System.out::println);
+        List<String> rating = parseAttribute(movies, GROUP.IMDB_RATING);
+        List<String> crew = parseAttribute(movies, GROUP.CREW);
+        crew.forEach(System.out::println);
     }
 
     private static List<String> parseAttribute(String[] movies, GROUP group) {
