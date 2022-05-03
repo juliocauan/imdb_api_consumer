@@ -1,5 +1,6 @@
 package br.com.juliocauan;
 
+import java.io.PrintWriter;
 import java.net.URI;
 import java.net.http.HttpClient;
 import java.net.http.HttpRequest;
@@ -13,6 +14,7 @@ public class imdb_api_consumer{
     public static void main(String[] args) throws Exception {
 
         String apiKey = "k_jngird0l";
+        String htmlName = "Top250Movies";
         URI top250MoviesURI = URI.create("https://imdb-api.com/en/API/Top250Movies/" + apiKey);
 
 		HttpClient client = HttpClient.newBuilder().version(Version.HTTP_2).build();
@@ -22,7 +24,8 @@ public class imdb_api_consumer{
 		String json = response.body();
         
         List<Movie> movies = Movie.parseJsonToMovieList(json);
-        movies.forEach(System.out::println);
+        HTMLGenerator html = new HTMLGenerator(new PrintWriter(htmlName));
+        html.generate(movies);
     }
 
 }
