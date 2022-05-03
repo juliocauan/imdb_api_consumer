@@ -1,9 +1,4 @@
 package br.com.juliocauan;
-
-import java.util.ArrayList;
-import java.util.List;
-import java.util.stream.Stream;
-
 public class Movie {
 
     private String title;
@@ -11,38 +6,10 @@ public class Movie {
     private Float rating;
     private Short year;
 
-    public static List<Movie> parseJsonToMovieList(String json) {
-        String[] moviesArray = parseJsonMovies(json);
-        List<Movie> movies = new ArrayList<Movie>();
-        Stream.of(moviesArray).forEach(movie -> movies.add(new Movie(movie)));
-        return movies;
-    }
-    private static String parseAttribute(String movie, GROUP group) {
-        return movie
-            //Splits array by group
-            .split("\",\"")[group.pos]
-            //Removes group name
-            .split("\":\"")[1]
-            //Removes any remnant -> " <-
-            .replaceAll("\"", "");
-    }
-    private static String[] parseJsonMovies(String json) {
-        return json.substring(11, json.length()-21).split("\\}.\\{");
-    }
-
-    private Movie(String movie){
-        this.title = parseAttribute(movie, GROUP.TITLE);
-        this.imageUrl = parseAttribute(movie, GROUP.IMAGE_URL);
-        this.rating = Float.valueOf(parseAttribute(movie, GROUP.IMDB_RATING));
-        this.year = Short.valueOf(parseAttribute(movie, GROUP.YEAR));
-    }
-    public Movie(String title, Short year) {
+    public Movie(String title, String year, String rating, String imageUrl){
         this.title = title;
-        this.year = year;
-        this.rating = 0f;
-    }
-    public Movie(String title, Short year, String imageUrl) {
-        this(title, year);
+        this.year = Short.valueOf(year);
+        this.rating = Float.valueOf(rating);
         this.imageUrl = imageUrl;
     }
     public Short getYear() {
