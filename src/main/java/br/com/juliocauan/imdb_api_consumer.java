@@ -24,8 +24,7 @@ public class imdb_api_consumer{
 		String json = response.body();
         
         List<Movie> movies = Movie.parseJsonToMovieList(json);
-        HTMLGenerator html = new HTMLGenerator(new PrintWriter(htmlName));
-        html.generate(movies);
+        new HTMLGenerator(new PrintWriter(htmlName)).generate(movies);
     }
 
 }
