@@ -1,4 +1,5 @@
-package br.com.juliocauan;
+package br.com.juliocauan.model.entity;
+
 public class Movie {
 
     private String title;

@@ -1,4 +1,4 @@
-package br.com.juliocauan;
+package br.com.juliocauan.model.enumerator;
 
 public enum GROUP {
     TITLE(2),

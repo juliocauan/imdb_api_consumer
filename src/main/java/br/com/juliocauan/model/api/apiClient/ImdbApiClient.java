@@ -1,4 +1,4 @@
-package br.com.juliocauan;
+package br.com.juliocauan.model.api.apiClient;
 
 import java.io.IOException;
 import java.net.URI;

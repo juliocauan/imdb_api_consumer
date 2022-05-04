@@ -3,6 +3,8 @@ package br.com.juliocauan;
 import java.io.PrintWriter;
 import java.util.List;
 
+import br.com.juliocauan.model.entity.Movie;
+
 public class HTMLGenerator {
 
     PrintWriter writer;
