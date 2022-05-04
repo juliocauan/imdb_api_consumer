@@ -1,4 +1,4 @@
-package br.com.juliocauan.model.entity.interfaces;
+package br.com.juliocauan.model.entity.config;
 
 public abstract class Content {
 
