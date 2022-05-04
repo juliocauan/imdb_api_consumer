@@ -9,20 +9,15 @@ import java.net.http.HttpClient.Version;
 import java.net.http.HttpResponse.BodyHandlers;
 import java.time.Duration;
 
-public class ImdbApiClient {
-
-    private String apiKey;
+public class ImdbApiClient extends ApiClient {
 
     public ImdbApiClient(String apiKey) {
-        this.apiKey = apiKey;
+        super(apiKey);
     }
 
-    public String getApiKey() {
-        return apiKey;
-    }
-
+    @Override
     public String getBody() {
-        URI top250MoviesURI = URI.create("https://imdb-api.com/en/API/Top250Movies/" + apiKey);
+        URI top250MoviesURI = URI.create("https://imdb-api.com/en/API/Top250Movies/" + getApiKey());
 		HttpClient client = HttpClient.newBuilder().version(Version.HTTP_2).build();
 		HttpRequest request = HttpRequest.newBuilder()
             .uri(top250MoviesURI)

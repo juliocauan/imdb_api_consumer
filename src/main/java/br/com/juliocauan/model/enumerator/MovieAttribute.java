@@ -1,6 +1,6 @@
 package br.com.juliocauan.model.enumerator;
 
-public enum GROUP {
+public enum MovieAttribute {
     TITLE(2),
     YEAR(4),
     IMAGE_URL(5),
@@ -9,7 +9,7 @@ public enum GROUP {
 
     public int pos;
 
-    private GROUP(int pos) {
+    private MovieAttribute(int pos) {
         this.pos = pos;
     }
 }

@@ -4,10 +4,20 @@ import java.util.List;
 
 import br.com.juliocauan.model.entity.Content;
 
-public interface JsonParser {
+public abstract class JsonParser<T extends Enum<T>> {
 
-    public List<? extends Content> parse();
-    public String[] parseJson(String json);
-    public String parseAttribute(String content, int pos);
+    private String json;
+
+    public JsonParser(String json) {
+        this.json = json;
+    }
+
+    public final String getJson(){
+        return json;
+    }
+
+    protected abstract List<? extends Content> parse();
+    protected abstract String[] parseJson(String json);
+    protected abstract String parseAttribute(String content, T attribute);
     
 }

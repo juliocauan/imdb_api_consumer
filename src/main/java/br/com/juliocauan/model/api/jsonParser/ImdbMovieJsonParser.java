@@ -5,40 +5,38 @@ import java.util.List;
 import java.util.stream.Stream;
 
 import br.com.juliocauan.model.entity.Movie;
-import br.com.juliocauan.model.enumerator.GROUP;
+import br.com.juliocauan.model.enumerator.MovieAttribute;
 
-public class ImdbMovieJsonParser implements JsonParser{
-
-    private String json;
+public class ImdbMovieJsonParser extends JsonParser<MovieAttribute>{
 
     public ImdbMovieJsonParser(String json) {
-        this.json = json;
+        super(json);
     }
 
     @Override
     public List<Movie> parse() {
-        String[] moviesArray = parseJson(this.json);
+        String[] moviesArray = parseJson(getJson());
         List<Movie> movies = new ArrayList<Movie>();
         Stream.of(moviesArray).forEach(movie ->movies.add(
             new Movie(
-                parseAttribute(movie, GROUP.TITLE.pos),
-                parseAttribute(movie, GROUP.YEAR.pos),
-                parseAttribute(movie, GROUP.IMDB_RATING.pos),
-                parseAttribute(movie, GROUP.IMAGE_URL.pos)
+                parseAttribute(movie, MovieAttribute.TITLE),
+                parseAttribute(movie, MovieAttribute.YEAR),
+                parseAttribute(movie, MovieAttribute.IMDB_RATING),
+                parseAttribute(movie, MovieAttribute.IMAGE_URL)
             )));
         return movies;
     }
 
     @Override
-    public String[] parseJson(String json) {
+    protected String[] parseJson(String json) {
         return json.substring(11, json.length()-21).split("\\}.\\{");
     }
 
     @Override
-    public String parseAttribute(String movie, int pos) {
+    protected String parseAttribute(String movie, MovieAttribute attribute) {
         return movie
             //Splits array by group
-            .split("\",\"")[pos]
+            .split("\",\"")[attribute.pos]
             //Removes group name
             .split("\":\"")[1]
             //Removes any remnant -> " <-
