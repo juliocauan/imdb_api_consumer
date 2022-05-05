@@ -6,7 +6,7 @@ import br.com.juliocauan.model.entity.Content;
 
 public abstract class JsonParser<T extends Enum<T>> {
 
-    private String json;
+    private final String json;
 
     protected JsonParser(String json) {
         this.json = json;
