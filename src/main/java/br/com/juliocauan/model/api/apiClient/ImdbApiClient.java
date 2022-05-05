@@ -11,8 +11,8 @@ import java.time.Duration;
 
 public class ImdbApiClient extends ApiClient {
 
-    public ImdbApiClient(String apiKey) {
-        super(apiKey);
+    public ImdbApiClient() {
+        super("k_jngird0l");
     }
 
     @Override

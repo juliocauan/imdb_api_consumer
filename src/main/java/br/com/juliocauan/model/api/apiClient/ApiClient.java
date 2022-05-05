@@ -4,7 +4,7 @@ public abstract class ApiClient {
     
     private String apiKey;
 
-    public ApiClient(String apiKey) {
+    protected ApiClient(String apiKey) {
         this.apiKey = apiKey;
     }
 
@@ -12,6 +12,6 @@ public abstract class ApiClient {
         return apiKey;
     }
 
-    public abstract String getBody();
+    protected abstract String getBody();
 
 }

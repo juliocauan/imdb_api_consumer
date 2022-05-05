@@ -10,7 +10,7 @@ public abstract class Content {
     private Short year;
     private ContentType type;
 
-    public Content(String title, String year, String rating, String imageUrl, ContentType type){
+    protected Content(String title, String year, String rating, String imageUrl, ContentType type){
         this.title = title;
         this.year = Short.valueOf(year);
         this.rating = Float.valueOf(rating);

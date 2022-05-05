@@ -8,7 +8,7 @@ public abstract class JsonParser<T extends Enum<T>> {
 
     private String json;
 
-    public JsonParser(String json) {
+    protected JsonParser(String json) {
         this.json = json;
     }
 
