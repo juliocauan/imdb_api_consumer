@@ -1,6 +1,6 @@
-package br.com.juliocauan.model.enumerator;
+package br.com.juliocauan.model.entity.ImdbEntity;
 
-public enum MovieAttribute {
+public enum ImdbAttribute {
     TITLE(2),
     YEAR(4),
     IMAGE_URL(5),
@@ -9,7 +9,7 @@ public enum MovieAttribute {
 
     public int pos;
 
-    private MovieAttribute(int pos) {
+    private ImdbAttribute(int pos) {
         this.pos = pos;
     }
 }

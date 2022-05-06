@@ -4,10 +4,10 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Stream;
 
-import br.com.juliocauan.model.entity.Movie;
-import br.com.juliocauan.model.enumerator.MovieAttribute;
+import br.com.juliocauan.model.entity.ImdbEntity.ImdbAttribute;
+import br.com.juliocauan.model.entity.ImdbEntity.Movie;
 
-public class ImdbMovieJsonParser extends JsonParser<MovieAttribute>{
+public class ImdbMovieJsonParser extends JsonParser<ImdbAttribute>{
 
     public ImdbMovieJsonParser(String json) {
         super(json);
@@ -19,10 +19,10 @@ public class ImdbMovieJsonParser extends JsonParser<MovieAttribute>{
         List<Movie> movies = new ArrayList<Movie>();
         Stream.of(moviesArray).forEach(movie ->movies.add(
             new Movie(
-                parseAttribute(movie, MovieAttribute.TITLE),
-                parseAttribute(movie, MovieAttribute.YEAR),
-                parseAttribute(movie, MovieAttribute.IMDB_RATING),
-                parseAttribute(movie, MovieAttribute.IMAGE_URL)
+                parseAttribute(movie, ImdbAttribute.TITLE),
+                parseAttribute(movie, ImdbAttribute.YEAR),
+                parseAttribute(movie, ImdbAttribute.IMDB_RATING),
+                parseAttribute(movie, ImdbAttribute.IMAGE_URL)
             )));
         return movies;
     }
@@ -33,7 +33,7 @@ public class ImdbMovieJsonParser extends JsonParser<MovieAttribute>{
     }
 
     @Override
-    protected String parseAttribute(String movie, MovieAttribute attribute) {
+    protected String parseAttribute(String movie, ImdbAttribute attribute) {
         return movie
             //Splits array by group
             .split("\",\"")[attribute.pos]

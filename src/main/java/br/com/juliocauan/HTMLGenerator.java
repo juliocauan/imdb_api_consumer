@@ -3,7 +3,7 @@ package br.com.juliocauan;
 import java.io.PrintWriter;
 import java.util.List;
 
-import br.com.juliocauan.model.entity.Movie;
+import br.com.juliocauan.model.entity.ImdbEntity.Movie;
 
 public class HTMLGenerator {
 

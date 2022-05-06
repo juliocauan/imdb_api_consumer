@@ -1,6 +1,6 @@
 package br.com.juliocauan.model.entity;
 
-import br.com.juliocauan.model.enumerator.ContentType;
+import br.com.juliocauan.model.entity.ImdbEntity.ImdbContentType;
 
 public abstract class Content {
 
@@ -8,9 +8,9 @@ public abstract class Content {
     private String imageUrl;
     private Float rating;
     private Short year;
-    private ContentType type;
+    private ImdbContentType type;
 
-    protected Content(String title, String year, String rating, String imageUrl, ContentType type){
+    protected Content(String title, String year, String rating, String imageUrl, ImdbContentType type){
         this.title = title;
         this.year = Short.valueOf(year);
         this.rating = Float.valueOf(rating);
@@ -33,7 +33,7 @@ public abstract class Content {
     public final String getTitle() {
         return title;
     }
-    public final ContentType getType(){
+    public final ImdbContentType getType(){
         return type;
     }
 
