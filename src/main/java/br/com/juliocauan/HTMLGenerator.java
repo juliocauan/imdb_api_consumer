@@ -3,7 +3,7 @@ package br.com.juliocauan;
 import java.io.PrintWriter;
 import java.util.List;
 
-import br.com.juliocauan.model.entity.ImdbEntity.Movie;
+import br.com.juliocauan.model.entity.Content;
 
 public class HTMLGenerator {
 
@@ -13,7 +13,7 @@ public class HTMLGenerator {
         this.writer = writer;
     }
 
-    public void generate(List<Movie> movies) {
+    public void generate(List<? extends Content> contents) {
         String head = """
                 <head>
                 	<meta charset=\"utf-8\">
@@ -34,13 +34,13 @@ public class HTMLGenerator {
                 """;
         
         writer.println(head);
-        movies.forEach(movie -> writer.println(String.format(
+        contents.forEach(content -> writer.println(String.format(
             divTemplate,
-            movie.title(),
-            movie.imageUrl(),
-            movie.title(),
-            movie.rating(),
-            movie.year()))
+            content.title(),
+            content.imageUrl(),
+            content.title(),
+            content.rating(),
+            content.year()))
         );
         writer.close();
     }
