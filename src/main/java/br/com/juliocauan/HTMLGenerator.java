@@ -36,11 +36,11 @@ public class HTMLGenerator {
         writer.println(head);
         movies.forEach(movie -> writer.println(String.format(
             divTemplate,
-            movie.getTitle(),
-            movie.getImageUrl(),
-            movie.getTitle(),
-            movie.getRating(),
-            movie.getYear()))
+            movie.title(),
+            movie.imageUrl(),
+            movie.title(),
+            movie.rating(),
+            movie.year()))
         );
         writer.close();
     }

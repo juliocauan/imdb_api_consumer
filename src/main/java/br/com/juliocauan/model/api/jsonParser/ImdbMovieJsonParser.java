@@ -19,10 +19,10 @@ public class ImdbMovieJsonParser extends JsonParser<ImdbAttribute>{
         List<Movie> movies = new ArrayList<Movie>();
         Stream.of(moviesArray).forEach(movie ->movies.add(
             new Movie(
-                parseAttribute(movie, ImdbAttribute.TITLE),
-                parseAttribute(movie, ImdbAttribute.YEAR),
-                parseAttribute(movie, ImdbAttribute.IMDB_RATING),
-                parseAttribute(movie, ImdbAttribute.IMAGE_URL)
+                parseTitle(movie),
+                parseYear(movie),
+                parseRating(movie),
+                parseImageUrl(movie)
             )));
         return movies;
     }
@@ -33,14 +33,30 @@ public class ImdbMovieJsonParser extends JsonParser<ImdbAttribute>{
     }
 
     @Override
-    protected String parseAttribute(String movie, ImdbAttribute attribute) {
-        return movie
+    protected String parseAttribute(String content, ImdbAttribute attribute) {
+        return content
             //Splits array by group
             .split("\",\"")[attribute.pos]
             //Removes group name
             .split("\":\"")[1]
             //Removes any remnant -> " <-
             .replaceAll("\"", "");
+    }
+
+    private String parseTitle(String content){
+        return parseAttribute(content, ImdbAttribute.TITLE);
+    }
+
+    private Short parseYear(String content){
+        return Short.valueOf(parseAttribute(content, ImdbAttribute.YEAR));
+    }
+
+    private Float parseRating(String content){
+        return Float.valueOf(parseAttribute(content, ImdbAttribute.IMDB_RATING));
+    }
+
+    private String parseImageUrl(String content){
+        return parseAttribute(content, ImdbAttribute.IMAGE_URL);
     }
 
 }
