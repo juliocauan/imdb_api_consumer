@@ -2,6 +2,7 @@ package br.com.juliocauan;
 
 import java.io.PrintWriter;
 import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 
 import br.com.juliocauan.model.api.apiClient.ImdbClient.ImdbApiClient;
@@ -16,7 +17,7 @@ public class imdb_api_consumer{
         //MOVIES - IMDB  
 		String imdbJson = new ImdbApiClient().getBody(MovieEndpoint.TOP_250_MOVIES);
         List<Movie> movies = new ImdbMovieJsonParser(imdbJson).parse();
-        Collections.sort(movies);
+        Collections.sort(movies, Comparator.comparing(Movie::year));
 
         //SERIES - IMDB
 		imdbJson = new ImdbApiClient().getBody(MovieEndpoint.TOP_250_TVS);
