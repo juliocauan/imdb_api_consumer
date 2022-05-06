@@ -1,6 +1,7 @@
 package br.com.juliocauan;
 
 import java.io.PrintWriter;
+import java.util.Collections;
 import java.util.List;
 
 import br.com.juliocauan.model.api.apiClient.ImdbClient.ImdbApiClient;
@@ -11,10 +12,13 @@ import br.com.juliocauan.model.entity.ImdbEntity.Movie;
 import br.com.juliocauan.model.entity.ImdbEntity.Series;
 
 public class imdb_api_consumer{
-    public static void main(String[] args) throws Exception {        
+    public static void main(String[] args) throws Exception {     
+        //MOVIES - IMDB  
 		String imdbJson = new ImdbApiClient().getBody(MovieEndpoint.TOP_250_MOVIES);
         List<Movie> movies = new ImdbMovieJsonParser(imdbJson).parse();
+        Collections.sort(movies);
 
+        //SERIES - IMDB
 		imdbJson = new ImdbApiClient().getBody(MovieEndpoint.TOP_250_TVS);
         List<Series> series = new ImdbSeriesJsonParser(imdbJson).parse();
 
