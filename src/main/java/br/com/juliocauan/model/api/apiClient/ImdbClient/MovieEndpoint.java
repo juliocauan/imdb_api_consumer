@@ -1,13 +1,13 @@
 package br.com.juliocauan.model.api.apiClient.ImdbClient;
 
-public enum MovieEndpoints {
+public enum MovieEndpoint {
 
     TOP_250_MOVIES("Top250Movies"),
     TOP_250_TVS("Top250TVs");
 
     public final String endpoint;
 
-    MovieEndpoints(String endpoint){
+    MovieEndpoint(String endpoint){
         this.endpoint = endpoint;
     }
 

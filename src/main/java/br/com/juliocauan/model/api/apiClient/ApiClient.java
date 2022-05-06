@@ -26,10 +26,9 @@ public abstract class ApiClient<T extends Enum<T>> {
         return apiUrl;
     }
 
-    protected abstract String getBody(T endpoint);
     protected abstract String makeUrl(T endpoint);
 
-    protected final String makeRequest(T endpoint) {
+    public final String getBody(T endpoint) {
         try {
 
             URI url = URI.create(makeUrl(endpoint));
