@@ -26,25 +26,26 @@ public abstract class ApiClient<T extends Enum<T>> {
         return apiUrl;
     }
 
-    protected abstract String getBody(T request);
-    protected abstract String makeUrl(T request);
+    protected abstract String getBody(T endpoint);
+    protected abstract String makeUrl(T endpoint);
 
-    protected final String makeRequest(T apiRequest) {
-        URI requestUrl = URI.create(makeUrl(apiRequest));
-		HttpClient client = HttpClient.newBuilder().version(Version.HTTP_2).build();
-		HttpRequest request = HttpRequest.newBuilder()
-            .uri(requestUrl)
-            .timeout(Duration.ofSeconds(30L))
-            .header("Content-Type", "application/json")
-            .GET().build();
-		HttpResponse<String> response = null;
+    protected final String makeRequest(T endpoint) {
         try {
-            response = client.send(request, BodyHandlers.ofString());
+
+            URI url = URI.create(makeUrl(endpoint));
+            HttpClient client = HttpClient.newBuilder().version(Version.HTTP_2).build();
+            HttpRequest request = HttpRequest.newBuilder()
+                .uri(url)
+                .timeout(Duration.ofSeconds(30L))
+                .header("Content-Type", "application/json")
+                .GET().build();
+            HttpResponse<String> response = client.send(request, BodyHandlers.ofString());
+            System.out.println("Status Code: " + response.statusCode() + "\nFor " + endpoint.name() + " request");
+            return response.body();
+
         } catch (IOException | InterruptedException e) {
-            e.printStackTrace();
+            throw new IllegalStateException(e);
         }
-		System.out.println("Status Code: " + response.statusCode() + "\nFor " + apiRequest.name() + " request");
-        return response.body();
     }
 
 }
