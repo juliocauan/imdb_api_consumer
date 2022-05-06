@@ -8,7 +8,8 @@ import br.com.juliocauan.model.api.apiClient.ApiClient;
 
 public class MarvelApiClient extends ApiClient<MarvelEndpoint>{
 
-    
+    private final String privateKey = "";
+
     public MarvelApiClient() {
         super("1871e6caf897d7c908703e2b49bcb025", "https://gateway.marvel.com/v1/public/");
     }

@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Stream;
 
-import br.com.juliocauan.model.entity.ImdbEntity.Series;
+import br.com.juliocauan.model.entity.ImdbEntity.Serie;
 
 public class ImdbSeriesJsonParser extends ImdbJsonParser{
 
@@ -13,11 +13,11 @@ public class ImdbSeriesJsonParser extends ImdbJsonParser{
     }
 
     @Override
-    public List<Series> parse() {
+    public List<Serie> parse() {
         String[] seriesArray = parseJson(getJson());
-        List<Series> series = new ArrayList<Series>();
+        List<Serie> series = new ArrayList<Serie>();
         Stream.of(seriesArray).forEach(serie -> series.add(
-            new Series(
+            new Serie(
                 parseTitle(serie),
                 parseYear(serie),
                 parseRating(serie),
